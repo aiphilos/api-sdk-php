@@ -13,7 +13,7 @@ The best way to install this library is to use [composer](https://getcomposer.or
 
 ## Usage
 ### Semantics
-#### Creating, configurating and using the default client
+#### Creating, configuring and using the default client
 ```php
 //create client
 $c = new Aiphilos\Api\Semantics\Client();
@@ -35,4 +35,4 @@ Aiphilos\Api\Semantics\SynsetFactory::setDefaultClass('My\Namespace\And\Classnam
 ```
 
 ## License
-This library is available under the [MIT license](LICENSE).
+This library is available under the [Apache 2.0 License](LICENSE).
