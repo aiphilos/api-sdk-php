@@ -1,0 +1,16 @@
+# Eclipse
+bin/
+tmp/
+*.tmp
+*.bak
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+.project
+.buildpath
+
+# composer / packagist
+composer.lock
+vendor/
