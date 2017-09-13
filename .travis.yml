@@ -5,6 +5,8 @@ install:
   - composer install
 script:
   - vendor/bin/phpunit
+  
+dist: trusty
 
 php:
   - 5.3
@@ -13,6 +15,7 @@ php:
   - 5.6
   - 7.0
   - 7.1
+  - nightly
   - hhvm
 
 notifications:
