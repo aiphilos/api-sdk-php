@@ -10,7 +10,7 @@ class ContentTypesEnum
     const PRODUCT_PRICE = 'product.price';
     const PRODUCT_GTIN = 'product.gtin';
     const PRODUCT_MANUFACTURER = 'product.manufacturer';
-    const PRODUCT_RATIN = 'product.rating';
+    const PRODUCT_RATING = 'product.rating';
     const PRODUCT_STATE = 'product.state'; //[new,used,refurbished]
     const ORDER_FREQUENCY = 'order.frequency';
 }
