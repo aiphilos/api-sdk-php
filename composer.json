@@ -3,7 +3,7 @@
     "description": "SDK for api.aiphilos.com",
     "keywords": ["sdk", "client", "ephilos", "api", "aiphilos", "ai"],
     "type": "library",
-    "license": "MIT",
+    "license": "Apache-2.0",
     "authors": [
         {"name": "Sven Muhle"}
     ],
