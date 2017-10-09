@@ -75,7 +75,7 @@ abstract class AbstractClient implements ClientInterface
     
     /**
      * (non-PHPdoc)
-     * @todo switch to API when its available
+     *
      * @see \Aiphilos\Api\ClientInterface::getLanguages()
      */
     public function getLanguages()
