@@ -29,15 +29,19 @@ abstract class AbstractClient implements ClientInterface
         $this->ref_id = $ref_id;
     }
     
-    protected function exec($path='', $language = null, array $options = array())
+    protected function exec($path = '', $language = null, array $options = array())
     {
-        $language = !empty($language) ? $language : $this->getDefaultLanguage();
-        if (!in_array($language, $this->getLanguages())) {
-            throw new \UnexpectedValueException('Unknown or invalid $language: '.$language.'. See getLanguages()');
+        $url_parts = array(Sdk::BASE_URL.Sdk::API_VERSION);
+        if ($language !== false) {
+            $language = !empty($language) ? $language : $this->getDefaultLanguage();
+            if (!in_array($language, $this->getLanguages())) {
+                throw new \UnexpectedValueException('Unknown or invalid $language: '.$language.'. See getLanguages()');
+            }
+            $url_parts[] = $language;
         }
-        $url = Sdk::BASE_URL.Sdk::API_VERSION.'/'.$language.'/'.$path;
+        $url_parts[] = $path;
         $default_options = array(
-            CURLOPT_URL => $url,
+            CURLOPT_URL => implode('/', $url_parts),
             CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
             CURLOPT_USERPWD => $this->auth_name.':'.$this->auth_pass,
             CURLOPT_RETURNTRANSFER => true,
@@ -54,11 +58,9 @@ abstract class AbstractClient implements ClientInterface
         curl_setopt_array($ch, array_replace($default_options, $options));
         $response = json_decode(curl_exec($ch), true);
         $response_http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        //curl_close($ch);
+        curl_close($ch);
         //handle generell api error
         if ($response === null || isset($response['messagecode']) && $response['messagecode'] !== 0 || $response_http_code < 200 || $response_http_code > 299) {
-//var_dump($response);
-//var_dump(curl_getinfo($ch));
             $message = !empty($response['message']) ? $response['message'] : 'Unknown';
             $message_code = isset($response['messagecode']) ? $response['messagecode'] : $response_http_code;
             switch ($message_code) {
@@ -73,12 +75,12 @@ abstract class AbstractClient implements ClientInterface
     
     /**
      * (non-PHPdoc)
-     * @todo switch to API when its available
+     *
      * @see \Aiphilos\Api\ClientInterface::getLanguages()
      */
     public function getLanguages()
     {
-        return array('de-de');
+        return $this->exec('languages', false, array(CURLOPT_POST => false));
     }
     
     /**
