@@ -29,7 +29,7 @@ abstract class AbstractClient implements ClientInterface
         $this->ref_id = $ref_id;
     }
     
-    protected function exec($path='', $language = null, array $options = array())
+    protected function exec($path = '', $language = null, array $options = array())
     {
         $language = !empty($language) ? $language : $this->getDefaultLanguage();
         if (!in_array($language, $this->getLanguages())) {
