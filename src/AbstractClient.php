@@ -18,6 +18,9 @@ abstract class AbstractClient implements ClientInterface
     /** @var string */
     protected $default_language = null;
     
+    /** @var string[] */
+    private $languages = null;
+    
     /**
      * (non-PHPdoc)
      * @see \Aiphilos\Api\ClientInterface::setAuthCredentials()
@@ -29,6 +32,15 @@ abstract class AbstractClient implements ClientInterface
         $this->ref_id = $ref_id;
     }
     
+    /**
+     * @todo documentation
+     * @param string $path
+     * @param string|null|false $language
+     * @param array $options
+     * @throws \UnexpectedValueException
+     * @throws \DomainException
+     * @return mixed
+     */
     protected function exec($path = '', $language = null, array $options = array())
     {
         $url_parts = array(Sdk::BASE_URL.Sdk::API_VERSION);
@@ -67,6 +79,8 @@ abstract class AbstractClient implements ClientInterface
                 case 401: $message = 'Unauthorized'; break;
                 case 403: $message = 'Forbidden'; break;
                 case 405: $message = 'Method Not Allowed'; break;
+                case 502: $message = 'Bad Gateway'; break;
+                case 504: $message = 'Gateway Timeout'; break;
             }
             throw new \DomainException($message, $message_code);
         }
@@ -80,7 +94,10 @@ abstract class AbstractClient implements ClientInterface
      */
     public function getLanguages()
     {
-        return $this->exec('languages', false, array(CURLOPT_POST => false));
+        if ($this->languages === null) {
+          $this->languages = $this->exec('languages', false, array(CURLOPT_POST => false));
+        }
+        return $this->languages;
     }
     
     /**
