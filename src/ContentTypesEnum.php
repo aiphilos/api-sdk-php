@@ -13,4 +13,24 @@ class ContentTypesEnum
     const PRODUCT_RATING = 'product.rating';
     const PRODUCT_STATE = 'product.state'; //[new,used,refurbished]
     const ORDER_FREQUENCY = 'order.frequency';
+    
+    /**
+     * Lists all types
+     * 
+     * @return string[]
+     */
+    public static function getAll() {
+        return array(
+            self::GENERAL_AUTO,
+            self::PRODUCT_NUMBER,
+            self::PRODUCT_NAME,
+            self::PRODUCT_DESCRIPTION,
+            self::PRODUCT_PRICE,
+            self::PRODUCT_GTIN,
+            self::PRODUCT_MANUFACTURER,
+            self::PRODUCT_RATING,
+            self::PRODUCT_STATE,
+            self::ORDER_FREQUENCY,
+        );
+    }
 }
