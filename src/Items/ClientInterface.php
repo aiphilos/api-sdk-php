@@ -51,6 +51,13 @@ interface ClientInterface extends GeneralClientInterface
     public function delete();
     
     /**
+     * Returns all databases
+     * 
+     * @return string[]
+     */
+    public function getDatabases();
+    
+    /**
      * Adds an item
      * 
      * @param string|int $id
@@ -74,6 +81,13 @@ interface ClientInterface extends GeneralClientInterface
     public function getItem($id);
     
     /**
+     * Returns all Items in a database
+     * 
+     * @return array
+     */
+    public function getItems();
+    
+    /**
      * Deletes an item
      * 
      * @param string|int $id
@@ -95,6 +109,4 @@ interface ClientInterface extends GeneralClientInterface
      * @return false|array
      */
     public function searchItems($string, $language = null);
-    
-    //@todo list all databases
 }
