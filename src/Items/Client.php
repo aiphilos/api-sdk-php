@@ -102,7 +102,7 @@ class Client extends AbstractClient implements ClientInterface
      */
     public function delete()
     {
-        //@todo
+        return $this->exec('items/'.$this->getName(), null, array(CURLOPT_POST => false, CURLOPT_CUSTOMREQUEST => 'DELETE'), true);
     }
     
     /**
@@ -216,11 +216,6 @@ class Client extends AbstractClient implements ClientInterface
      */
     public function searchItems($string, $language = null)
     {
-        //@todo tausch gegen die API
-        $return = $this->getItems();
-        if (count($return) > 5) {
-          $return = array_slice($return, rand(0, count($return)-3), rand(0, 3));
-        }
-        return $return;
+        return $this->exec('items/'.$this->getName().'/search', $language, array(CURLOPT_POSTFIELDS => json_encode(array('query'=>$string))), true);
     }
 }
