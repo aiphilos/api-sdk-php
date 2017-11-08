@@ -179,9 +179,19 @@ class Client extends AbstractClient implements ClientInterface
      * (non-PHPdoc)
      * @see \Aiphilos\Api\Items\ClientInterface::getItems()
      */
-    public function getItems()
+    public function getItems($from = 0, $size = 10)
     {
-        return $this->exec('items/'.$this->getName(), null, array(CURLOPT_POST => false), true);
+        $fields = array(
+            'from' => $from,
+            'size' => $size,
+        );
+        if (!is_numeric($from)) {
+            throw new \UnexpectedValueException('$from should be an integer');
+        }
+        if (!is_numeric($size)) {
+            throw new \UnexpectedValueException('$size should be an integer');
+        }
+        return $this->exec('items/'.$this->getName().'?'.http_build_query($fields), null, array(CURLOPT_POST => false), true);
     }
     
     /**

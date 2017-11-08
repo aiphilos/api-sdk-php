@@ -82,10 +82,15 @@ interface ClientInterface extends GeneralClientInterface
     
     /**
      * Returns all Items in a database
-     * 
+     *
+     * @throws \UnexpectedValueException
+     *
+     * @param int $from
+     * @param int $size
+     *
      * @return array
      */
-    public function getItems();
+    public function getItems($from = 0, $size = 10);
     
     /**
      * Deletes an item
