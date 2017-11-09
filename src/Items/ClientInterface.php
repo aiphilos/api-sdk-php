@@ -5,8 +5,7 @@ use Aiphilos\Api\ClientInterface as GeneralClientInterface;
 use Aiphilos\Api\ContentTypesEnum;
 
 /**
- * search client interface
- * @todo write documentation
+ * Items client interface
  */
 interface ClientInterface extends GeneralClientInterface
 {
@@ -101,6 +100,7 @@ interface ClientInterface extends GeneralClientInterface
     
     /**
      * insert/update/delete items
+     * 
      * @param array $items
      */
     public function batchItems(array $items);
