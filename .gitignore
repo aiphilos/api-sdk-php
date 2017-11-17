@@ -14,3 +14,6 @@ local.properties
 # composer / packagist
 composer.lock
 vendor/
+
+# IntelliJ based IDEs
+.idea/
