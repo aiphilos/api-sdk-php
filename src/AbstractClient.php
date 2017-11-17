@@ -101,9 +101,9 @@ abstract class AbstractClient implements ClientInterface
     }
     
     /**
-     * Sets the default language
+     * (non-PHPdoc)
      *
-     * @param string $language
+     * @see \Aiphilos\Api\ClientInterface::setDefaultLanguage()
      *
      * @throws \UnexpectedValueException
      */
@@ -116,7 +116,9 @@ abstract class AbstractClient implements ClientInterface
     }
     
     /**
-     * @return string
+     * (non-PHPdoc)
+     *
+     * @see \Aiphilos\Api\ClientInterface::getDefaultLanguage()
      */
     public function getDefaultLanguage()
     {

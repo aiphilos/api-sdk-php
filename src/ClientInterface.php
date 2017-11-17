@@ -23,4 +23,16 @@ interface ClientInterface
      * @return String[]
      */
     public function getLanguages();
+
+    /**
+     * Sets the default language
+     *
+     * @param string $language
+     */
+    public function setDefaultLanguage($language);
+
+    /**
+     * @return string
+     */
+    public function getDefaultLanguage();
 }
