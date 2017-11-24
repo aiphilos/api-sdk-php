@@ -70,7 +70,7 @@ class Client extends AbstractClient implements ClientInterface
      */
     public function getDetails()
     {
-        return $this->exec('items/'.$this->getName(), null, array(CURLOPT_POST => false), true);
+        return $this->exec('items/'.$this->getName(), null, array(CURLOPT_POST => false, CURLOPT_CUSTOMREQUEST => 'HEAD'), true);
     }
     
     /**
@@ -179,18 +179,9 @@ class Client extends AbstractClient implements ClientInterface
      * (non-PHPdoc)
      * @see \Aiphilos\Api\Items\ClientInterface::getItems()
      */
-    public function getItems($from = 0, $size = 10)
+    public function getItems(array $config = array())
     {
-        $fields = array(
-            'from' => $from,
-            'size' => $size,
-        );
-        if (!is_numeric($from)) {
-            throw new \UnexpectedValueException('$from should be an integer');
-        }
-        if (!is_numeric($size)) {
-            throw new \UnexpectedValueException('$size should be an integer');
-        }
+        $fields = $config;
         return $this->exec('items/'.$this->getName().'?'.http_build_query($fields), null, array(CURLOPT_POST => false), true);
     }
     
@@ -224,8 +215,8 @@ class Client extends AbstractClient implements ClientInterface
      * (non-PHPdoc)
      * @see \Aiphilos\Api\Items\ClientInterface::searchItems()
      */
-    public function searchItems($string, $language = null)
+    public function searchItems($string, $language = null, array $config = array())
     {
-        return $this->exec('items/'.$this->getName().'/search', $language, array(CURLOPT_POSTFIELDS => json_encode(array('query'=>$string))), true);
+        return $this->exec('items/'.$this->getName().'/search', $language, array(CURLOPT_POSTFIELDS => json_encode(array_merge(array('query'=>$string), $config))), true);
     }
 }

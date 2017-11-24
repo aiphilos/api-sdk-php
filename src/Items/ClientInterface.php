@@ -84,12 +84,16 @@ interface ClientInterface extends GeneralClientInterface
      *
      * @throws \UnexpectedValueException
      *
-     * @param int $from
-     * @param int $size
+     * @param array $config Array with key value options
+     * int from
+     * int size
+     * string sort
+     * string order asc|desc
+     * boolean unsorted
      *
      * @return array
      */
-    public function getItems($from = 0, $size = 10);
+    public function getItems(array $config = array());
     
     /**
      * Deletes an item
@@ -110,8 +114,14 @@ interface ClientInterface extends GeneralClientInterface
      *
      * @param string $string
      * @param string $language
+     * @param array $config Array with key value options
+     * int from
+     * int size
+     * string sort
+     * string order asc|desc
+     * boolean unsorted
      *
      * @return false|array
      */
-    public function searchItems($string, $language = null);
+    public function searchItems($string, $language = null, array $config = array());
 }
