@@ -45,6 +45,13 @@ interface ClientInterface extends GeneralClientInterface
     public function setScheme(array $scheme);
     
     /**
+     * Returns the scheme
+     *
+     * @return array key -> value pairs @see ContentTypesEnum
+     */
+    public function getScheme();
+    
+    /**
      * Deletes the database
      */
     public function delete();

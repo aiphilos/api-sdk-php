@@ -98,6 +98,15 @@ class Client extends AbstractClient implements ClientInterface
     
     /**
      * (non-PHPdoc)
+     * @see \Aiphilos\Api\Items\ClientInterface::getScheme()
+     */
+    public function getScheme()
+    {
+        return $this->exec('items/'.$this->getName().'/scheme', null, array(CURLOPT_POST => false), true);
+    }
+    
+    /**
+     * (non-PHPdoc)
      * @see \Aiphilos\Api\Items\ClientInterface::delete()
      */
     public function delete()
