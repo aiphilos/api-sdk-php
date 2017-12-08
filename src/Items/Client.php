@@ -79,7 +79,7 @@ class Client extends AbstractClient implements ClientInterface
             $tmp = $this->getItems(array('size'=>1));
             $return['count_items'] = $tmp['total'];
         } catch (\Exception $e) {
-          //skip
+            //skip
         }
         return $return;
     }
@@ -258,7 +258,7 @@ class Client extends AbstractClient implements ClientInterface
                 CURLOPT_NOBODY => true,
             ), true);
         } catch (\Exception $e) {
-            return $e->getCode() === 200 ? true : false;
+            return $e->getCode() === 200;
         }
         return false;
     }
