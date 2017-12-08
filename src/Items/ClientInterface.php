@@ -64,6 +64,13 @@ interface ClientInterface extends GeneralClientInterface
     public function getDatabases();
     
     /**
+     * Checks if a database exists
+     * 
+     * @return bool
+     */
+    public function checkDatabaseExists();
+    
+    /**
      * Adds an item
      * 
      * @param string|int $id

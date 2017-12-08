@@ -132,7 +132,12 @@ class Client extends AbstractClient implements ClientInterface
         }
         $options = array();
         if (is_array($item)) {
-            $options[CURLOPT_POSTFIELDS] = json_encode($item);
+            $item_data = array();
+            foreach ($item as $key => $value) {
+              if(substr($key, 0, 1) === '_') { continue; }
+              $item_data[$key] = $value;
+            }
+            $options[CURLOPT_POSTFIELDS] = json_encode($item_data);
         }
         switch ($action) {
             case 'read':
@@ -202,7 +207,7 @@ class Client extends AbstractClient implements ClientInterface
     {
         //@todo tausch gegen die API
         foreach ($items as $item) {
-            switch (strtoupper($item['__action'])) {
+            switch (strtoupper($item['_action'])) {
                 case 'POST':
                 case 'CREATE':
                 case 'ADD':
@@ -227,5 +232,20 @@ class Client extends AbstractClient implements ClientInterface
     public function searchItems($string, $language = null, array $config = array())
     {
         return $this->exec('items/'.$this->getName().'/search', $language, array(CURLOPT_POSTFIELDS => json_encode(array_merge(array('query'=>$string), $config))), true);
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \Aiphilos\Api\Items\ClientInterface::existsDatabase()
+     */
+    public function checkDatabaseExists()
+    {
+        //@todo switch to endpoint after dev for head-handling with no body
+        try {
+            $dbs = $this->getDatabases();
+        } catch (\Exception $e) {
+          //skip
+        }
+        return in_array($this->getName(), isset($dbs['results']) ? $dbs['results'] : array());
     }
 }
