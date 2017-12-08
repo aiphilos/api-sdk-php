@@ -70,7 +70,18 @@ class Client extends AbstractClient implements ClientInterface
      */
     public function getDetails()
     {
-        return $this->exec('items/'.$this->getName(), null, array(CURLOPT_POST => false, CURLOPT_CUSTOMREQUEST => 'HEAD'), true);
+        $return = array(
+          'name' => $this->getName(),
+          'exists' => $this->checkDatabaseExists(),
+          'count_items' => 0,
+        );
+        try {
+            $tmp = $this->getItems(array('size'=>1));
+            $return['count_items'] = $tmp['total'];
+        } catch (\Exception $e) {
+          //skip
+        }
+        return $return;
     }
     
     /**
@@ -240,12 +251,15 @@ class Client extends AbstractClient implements ClientInterface
      */
     public function checkDatabaseExists()
     {
-        //@todo switch to endpoint after dev for head-handling with no body
         try {
-            $dbs = $this->getDatabases();
+            return $this->exec('items/'.$this->getName(), null, array(
+                CURLOPT_POST => false,
+                CURLOPT_CUSTOMREQUEST => 'HEAD',
+                CURLOPT_NOBODY => true,
+            ), true);
         } catch (\Exception $e) {
-          //skip
+            return $e->getCode() === 200 ? true : false;
         }
-        return in_array($this->getName(), isset($dbs['results']) ? $dbs['results'] : array());
+        return false;
     }
 }
