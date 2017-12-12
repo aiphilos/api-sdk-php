@@ -1,9 +1,9 @@
-# aiphilos - Artificial Intelligence as a Service
+# aiPhilos - Artificial Intelligence as a Service
 [![Build Status](https://travis-ci.org/aiphilos/api-sdk-php.svg?branch=master)](https://travis-ci.org/aiphilos/api-sdk-php) [![Latest Stable Version](https://poser.pugx.org/aiphilos/api-sdk-php/v/stable)](https://packagist.org/packages/aiphilos/api-sdk-php) [![Total Downloads](https://poser.pugx.org/aiphilos/api-sdk-php/downloads)](https://packagist.org/packages/aiphilos/api-sdk-php) [![Latest Unstable Version](https://poser.pugx.org/aiphilos/api-sdk-php/v/unstable)](https://packagist.org/packages/aiphilos/api-sdk-php) [![License](https://poser.pugx.org/aiphilos/api-sdk-php/license)](https://packagist.org/packages/aiphilos/api-sdk-php)
 
-**aiphilos** provides natural language processing capabilities including advanced semantical and lexicographical analysis based on recent advancements in Artificial Intelligence technology.
+**aiPhilos** provides natural language processing capabilities including advanced semantical and lexicographical analysis based on recent advancements in Artificial Intelligence technology.
 
-Currently, **aiphilos** provides two sets of APIs:
+Currently, **aiPhilos** provides two sets of APIs:
 - **semantics** can split natural human language input into machine-readable chunks and attach additional information usable to deepen natural language understanding in your application (part of speech, word classes and categories, lexicographical data, synonyms/hypernyms/hyponyms, similarity and sentiment data, and learnt knowledge)
 - **items** provides a real-time database and search engine backed by **semantics** focused on improving state-of-the-art search results for yor data by adding natural language analysis and Artificial Intelligence as a component to understand the searched data
 
