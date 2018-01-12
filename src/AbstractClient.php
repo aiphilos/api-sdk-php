@@ -73,14 +73,18 @@ abstract class AbstractClient implements ClientInterface
         curl_close($ch);
         //handle generell api error
         if ($response === null || isset($response['messagecode']) && $response['messagecode'] !== 0 || $response_http_code < 200 || $response_http_code > 299) {
-            $message = !empty($response['message']) ? $response['message'] : 'Unknown';
+            $message = !empty($response['message']) ? $response['message'] : '';
             $message_code = isset($response['messagecode']) ? $response['messagecode'] : $response_http_code;
             switch ($message_code) {
+                case 307: $message = 'Temporary Redirect'; break;
                 case 401: $message = 'Unauthorized'; break;
                 case 403: $message = 'Forbidden'; break;
                 case 405: $message = 'Method Not Allowed'; break;
                 case 502: $message = 'Bad Gateway'; break;
                 case 504: $message = 'Gateway Timeout'; break;
+            }
+            if(empty($message)) {
+                $message = 'Unknown';
             }
             throw new \DomainException($message, $message_code);
         }
