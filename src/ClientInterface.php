@@ -35,4 +35,13 @@ interface ClientInterface
      * @return string
      */
     public function getDefaultLanguage();
+
+    /**
+     * Rates the quality of a certain response
+     * 
+     * @param string $uuid
+     * @param float $sore
+     * @param string $comment
+     */
+    public function addRating($uuid, $sore, $comment = '');
 }

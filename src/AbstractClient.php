@@ -128,4 +128,15 @@ abstract class AbstractClient implements ClientInterface
     {
         return $this->default_language;
     }
+    
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \Aiphilos\Api\ClientInterface::addRating()
+     */
+    public function addRating($uuid, $score, $comment = '')
+    {
+        $this->exec('ratings', false, array(CURLOPT_POSTFIELDS => json_encode(array('uuid'=>$uuid, 'score'=>$score, 'comment'=>$comment))));
+        return true;
+    }
 }
