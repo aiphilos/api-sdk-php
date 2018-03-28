@@ -18,6 +18,24 @@ interface ClientInterface
     public function setAuthCredentials($name, $pass, $ref_id = null);
     
     /**
+     * set the base URL
+     *
+     * @param string $url
+     *
+     * @return void
+     */
+    public function setBaseUrl($url);
+    
+    /**
+     * set the default options the api calls
+     *
+     * @param array $options
+     *
+     * @return void
+     */
+    public function setDefaultOptions(array $options = array());
+    
+    /**
      * Lists all supported languages
      *
      * @return String[]
