@@ -21,6 +21,12 @@ abstract class AbstractClient implements ClientInterface
     /** @var string[] */
     private $languages = null;
     
+    /** @var array */
+    protected $default_options = array();
+    
+    /** @var string */
+    protected $base_url = Sdk::BASE_URL;
+    
     /**
      * (non-PHPdoc)
      * @see \Aiphilos\Api\ClientInterface::setAuthCredentials()
@@ -30,6 +36,24 @@ abstract class AbstractClient implements ClientInterface
         $this->auth_name = $name;
         $this->auth_pass = $pass;
         $this->ref_id = $ref_id;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \Aiphilos\Api\ClientInterface::setBaseUrl()
+     */
+    public function setBaseUrl($url)
+    {
+        $this->base_url = $url;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \Aiphilos\Api\ClientInterface::setDefaultOptions()
+     */
+    public function setDefaultOptions(array $options = array())
+    {
+        $this->default_options = $options;
     }
     
     /**
@@ -43,7 +67,7 @@ abstract class AbstractClient implements ClientInterface
      */
     protected function exec($path = '', $language = null, array $options = array())
     {
-        $url_parts = array(Sdk::BASE_URL.Sdk::API_VERSION);
+        $url_parts = array($this->base_url.Sdk::API_VERSION);
         if ($language !== false) {
             $language = !empty($language) ? $language : $this->getDefaultLanguage();
             if (!in_array($language, $this->getLanguages())) {
@@ -67,7 +91,7 @@ abstract class AbstractClient implements ClientInterface
             ),
         );
         $ch = curl_init();
-        curl_setopt_array($ch, array_replace($default_options, $options));
+        curl_setopt_array($ch, array_replace($default_options, $this->default_options, $options));
         $response = json_decode(curl_exec($ch), true);
         $response_http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
