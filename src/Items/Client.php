@@ -214,26 +214,35 @@ class Client extends AbstractClient implements ClientInterface
      * (non-PHPdoc)
      * @see \Aiphilos\Api\Items\ClientInterface::batchItems()
      */
-    public function batchItems(array $items)
+    public function batchItems(array $items, array $config = array())
     {
-        //@todo tausch gegen die API
-        foreach ($items as $item) {
+        $return = array();
+        $limit = 10000;
+        foreach ($items as &$item) {
+            $action = 'POST';
             switch (strtoupper($item['_action'])) {
-                case 'POST':
+                default:
+                    $action = strtoupper($item['_action']);
+                    break;
                 case 'CREATE':
                 case 'ADD':
-                    $this->addItem($item['_id'], $item);
+                    $action = 'POST';
                     break;
                 case 'EDIT':
                 case 'UPDATE':
-                case 'PUT':
-                    $this->updateItem($item['_id'], $item);
+                    $action = 'PUT';
                     break;
-                case 'DELETE':
-                    $this->deleteItem($item['_id']);
+                case 'REMOVE':
+                    $action = 'DELETE';
                     break;
             }
+            $item['_id'] = (string)$item['_id'];
+            $item['_action'] = $action;
         }
+        foreach (array_chunk($items, $limit) as $package) {
+            $return[] = $this->exec('items/'.$this->getName().'/batch', null, array(CURLOPT_POSTFIELDS => json_encode(array_merge(array('items'=>$package), $config))), true);
+        }
+        return $return;
     }
     
     /**
