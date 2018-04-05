@@ -120,8 +120,11 @@ interface ClientInterface extends GeneralClientInterface
      * insert/update/delete items
      * 
      * @param array $items
+     * @param array $config Array with key value options
+     * 
+     * @return array
      */
-    public function batchItems(array $items);
+    public function batchItems(array $items, array $config = array());
     
     /**
      * Search items
