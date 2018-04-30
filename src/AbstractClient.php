@@ -163,4 +163,13 @@ abstract class AbstractClient implements ClientInterface
         $this->exec('ratings', false, array(CURLOPT_POSTFIELDS => json_encode(array('uuid'=>$uuid, 'score'=>$score, 'comment'=>$comment))));
         return true;
     }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \Aiphilos\Api\ClientInterface::getHealth()
+     */
+    public function getHealth()
+    {
+        return $this->exec('health', false, array(CURLOPT_POST => false));
+    }
 }

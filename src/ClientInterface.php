@@ -62,4 +62,11 @@ interface ClientInterface
      * @param string $comment
      */
     public function addRating($uuid, $sore, $comment = '');
+
+    /**
+     * Returns the current status (health) of the API
+     * 
+     * @return string
+     */
+    public function getHealth();
 }
