@@ -4,8 +4,8 @@
 **aiPhilos** provides natural language processing capabilities including advanced semantical and lexicographical analysis based on recent advancements in Artificial Intelligence technology.
 
 Currently, **aiPhilos** provides two sets of APIs:
-- **semantics** can split natural human language input into machine-readable chunks and attach additional information usable to deepen natural language understanding in your application (part of speech, word classes and categories, lexicographical data, synonyms/hypernyms/hyponyms, similarity and sentiment data, and learnt knowledge)
-- **items** provides a real-time database and search engine backed by **semantics** focused on improving state-of-the-art search results for yor data by adding natural language analysis and Artificial Intelligence as a component to understand the searched data
+- **items** provides a real-time database and search engine using the **semantics** API (see below) improving search results and indexing through understanding natural language, adding natural language analysis and Artificial Intelligence as a component to understand your data set
+- **semantics** can split natural human language input into machine-readable chunks and attach additional information usable to deepen natural language understanding in your application (tokenization, part of speech tagging, word classes and categories, named entity recognition, lexicographical data, synonyms/hypernyms/hyponyms, similarity and sentiment data, and learned knowledge)
 
 For more, visit [aiphilos.com](https://aiphilos.com).
 
