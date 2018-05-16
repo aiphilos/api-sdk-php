@@ -217,7 +217,7 @@ class Client extends AbstractClient implements ClientInterface
     public function batchItems(array $items, array $config = array())
     {
         $return = array();
-        $limit = 10000;
+        $limit = 1000;
         foreach ($items as &$item) {
             $action = 'POST';
             switch (strtoupper($item['_action'])) {
