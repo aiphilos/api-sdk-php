@@ -21,6 +21,10 @@ class ContentTypesEnum
     const PRODUCT_MODIFIER = 'product.modifier';
     const PRODUCT_OBJECT = 'product.object';
     const PRODUCT_STOCK = 'product.stock';
+    const PRODUCT_KEYWORD = 'product.keyword';
+    const PRODUCT_ORDER_UNIT = 'product.order_unit';
+    const PRODUCT_CONTENT_UNIT = 'product.content_unit';
+    const PRODUCT_ATTRIBUTE = 'product.attribute';
     const ORDER_FREQUENCY = 'order.frequency';
     
     /**
@@ -48,6 +52,10 @@ class ContentTypesEnum
             self::PRODUCT_MODIFIER,
             self::PRODUCT_OBJECT,
             self::PRODUCT_STOCK,
+            self::PRODUCT_KEYWORD,
+            self::PRODUCT_ORDER_UNIT,
+            self::PRODUCT_CONTENT_UNIT,
+            self::PRODUCT_ATTRIBUTE,
             self::ORDER_FREQUENCY,
         );
     }
